@@ -9,9 +9,10 @@ from math import ceil
 from pybrain.datasets import SupervisedDataSet
 
 
+
 class predictor(object):
 
-    def __init__(self, symbol_of_stock, range_of_prediction=8, training_range = 500):
+    def __init__(self, symbol_of_stock, range_of_prediction=8, training_range = 500): 
 
         fromDateTrain = datetime.utcnow() - timedelta(days=(training_range+range_of_prediction))#on donne le nb de jour avant auj ou on commence
         toDateTrain = datetime.utcnow() - timedelta(days=range_of_prediction)#on s'arrete tant de j avan auj
@@ -24,7 +25,6 @@ class predictor(object):
         self.dataRecovery = dataRecovery.dataRecovery()
         self.trainData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateTrain, toDateTrain)
         self.ValidationData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateValidation, toDateValidation)
-
         self.postTreatmentDataset()
 
     def postTreatmentDataset(self, quotes):
