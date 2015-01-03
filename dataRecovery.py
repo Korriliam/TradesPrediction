@@ -48,6 +48,7 @@ import datetime
 import requests
 import numpy as np
 from StringIO import StringIO
+import predictor
 
 
 CODES_YAHOO = {
@@ -342,7 +343,7 @@ GOOGLE_EXCHANGES = {
 
 
 
-def from_google(symbol):
+def from_google_info(symbol):
     if symbol.startswith("."):
         symbol = REUTERS_TO_GOOGLE.get(symbol, symbol)
     url = 'http://www.google.com/finance/info?q=%s' % symbol
@@ -503,10 +504,10 @@ def get(symbol, start_date=None, end_date=None):
 
 
 if __name__ == "__main__":
-    r = from_google("AAPL")
-    e = from_google_historical("AAPL","2005-05-05")
-    print "ok"
-    pass
+    # r = from_google_info("AAPL")
+    # e = from_google_historical("AAPL","2005-05-05")
+    
+    e = predictor()
 
     '''
     import sys, os

@@ -7,10 +7,92 @@ import dataRecovery
 from datetime import datetime, date, time, timedelta
 from math import ceil
 from pybrain.datasets import SupervisedDataSet
+from sklearn.feature_extraction.text import CountVectorizer
+import numpy as np
+import cPickle as pickle
+from datetime import datetime
+import random
+import os
+import time
+import itertools
+import plotly.plotly as py
+from plotly.graph_objs import Scatter, Data, Bar, Layout, Figure
+from test_polyfit2d import  polyval2d, polyfit2d
+from math import exp
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import colors
+from scipy.optimize import curve_fit
+from scipy import array
+from collections import defaultdict
 
+import Orange
+from Orange import tuning
+from Orange.classification import svm
+from Orange.classification import neural
+from Orange import ensemble
+from nltk.stem import SnowballStemmer
+from pycallgraph import PyCallGraph
+from pycallgraph.output import GraphvizOutput
+from Orange.evaluation import testing, scoring
+import operator
 
 
 class predictor(object):
+
+    debug = False  # niveau 3
+    debugBis = True  # niveau 2
+    debugTer = True  # niveau 1
+
+
+
+    availableClassifiersPerInstance = {
+        "SVM": False,
+        "SVM2": False,
+        "NaiveBayes": False,
+        "NeuralNetwork": False,
+        "Knn": False,
+        "LinearSVM": True,
+        "CN2": False,
+        "CN2Unordered": False, 
+        "BTree": False,
+        "STree": False,
+        "Bag": False,
+        "RForest": False,
+        "Stacking": False
+    }
+
+    """
+    Nous allons "eduquer" notre classifieur avec les instances contenues dans la base d'apprentissage
+    """
+    BaseApprentissage = {}
+    BaseValidation = {}
+
+    """
+    Contient la liste des instances des classifieurs
+    """
+    classifiers = {}
+
+    """
+    Accueille les données d'apprentissage.
+    """
+    TrainData = None
+
+    """
+    Stocke les données de validation
+    """
+    ValidationData = None
+
+
+    ratioUsed = 0.6
+
+
+    """
+    neural network
+    """
+    nbNode = 25
+    regFact = 0.01
+    nbnnIt = 1000
 
     def __init__(self, symbol_of_stock, range_of_prediction=8, training_range = 500): 
 
@@ -22,10 +104,13 @@ class predictor(object):
 
         self.numberOfDimensionOfDescriptor = 8
 
-        self.dataRecovery = dataRecovery.dataRecovery()
-        self.trainData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateTrain, toDateTrain)
-        self.ValidationData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateValidation, toDateValidation)
-        self.postTreatmentDataset()
+        # self.dataRecovery = dataRecovery.dataRecovery()
+        # self.trainData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateTrain, toDateTrain)
+        # self.ValidationData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateValidation, toDateValidation)
+        # self.postTreatmentDataset()
+
+
+        print "Ended."
 
     def postTreatmentDataset(self, quotes):
         '''
