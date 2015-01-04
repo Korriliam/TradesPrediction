@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
 __author__ = 'korrigan'
 
 import cPickle
@@ -17,7 +21,7 @@ import time
 import itertools
 import plotly.plotly as py
 from plotly.graph_objs import Scatter, Data, Bar, Layout, Figure
-from test_polyfit2d import  polyval2d, polyfit2d
+
 from math import exp
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -74,12 +78,12 @@ class predictor(object):
     classifiers = {}
 
     """
-    Accueille les donn�es d'apprentissage.
+    Accueille les donn�es d'apprentissage.
     """
     TrainData = None
 
     """
-    Stocke les donn�es de validation
+    Stocke les donn�es de validation
     """
     ValidationData = None
 
@@ -108,26 +112,99 @@ class predictor(object):
         # self.trainData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateTrain, toDateTrain)
         # self.ValidationData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateValidation, toDateValidation)
         # self.postTreatmentDataset()
-
-
+        self.nbj = 30
+        self.Data = dataRecovery.from_google_historical("AAPL","2005-05-05")
+        self.defineDomain()
+        self.postTreatmentDataset(self.Data)
+        self.dataOrange = Orange.data.Table(self.domain, self.dataNumpy)
+        print "ok"
+        learners = [
+            # neural.NeuralNetworkLearner(n_mid=250, reg_fact=0.01, max_iter=1000)
+            Orange.classification.bayes.NaiveLearner(),
+            Orange.classification.majority.MajorityLearner(),
+            Orange.ensemble.forest.RandomForestLearner(),
+            Orange.classification.svm.LinearSVMLearner(solver_type=Orange.classification.svm.LinearSVMLearner.L2R_L2LOSS_DUAL,
+                                                               C=1.0,
+                                                               eps=1,
+                                                               normalization=True),
+        ]
+        cv = Orange.evaluation.testing.cross_validation(learners, self.dataOrange, folds=5)
+        print "Accuracy:",
+        print ["%.4f" % score for score in Orange.evaluation.scoring.CA(cv)]
+        print "AUC:",
+        print ["%.4f" % score for score in Orange.evaluation.scoring.AUC(cv)]
         print "Ended."
 
     def postTreatmentDataset(self, quotes):
         '''
-        We will use the addSample function to build our dataset
+        Va generer les donnes "Open,High,Low,Close,Volume x 5 jours, plus le labelé (si le 6e jour ça monte ou pas)
         :return:
         '''
-        e = SupervisedDataSet() # o
-        # outp values is True if the stock is increasing this day, of False if it's decreasing.
-
+        # Date Open High Low Close Volume
         variations = []
-        for i, quote in enumerate(quotes):
-            if i >= 1:
-                variation = (quote[0] - quotes[i-1][0])/quotes[i-1][0]
-                variations.append(variation)
-                gain_volume = (quote[1] - quotes[i-1][1])/quotes[i-1][1]
-                gains_volume.append(gain_volume)
-            #e.addSample(inp, outp)
+        size = quotes.shape[0]
+        l = range(size-100)
+        quotes = quotes[::-1] # on inverse
+        # oo = np.zeros(ceil(size/10))
+        u = 0
+        for i in l[::self.nbj]:
+            j = 0
+            print "---"
+            vec = np.zeros((self.nbj-1)+1)
+            rr = self.gainNormaliseParJour(quotes[i:i+self.nbj-1])
+            while j != self.nbj-1:
+                print quotes[i+j]['Date']
+                vec[j] = rr[j]
+                # vec[j*5 + 1] = quotes[i+j]['High']
+                # vec[j*5 + 2] = quotes[i+j]['Low']
+                # vec[j*5 + 3] = quotes[i+j]['Close']
+                # vec[j*5 + 4] = quotes[i+j]['Volume']
+                j += 1
+            print "to predict : " + str(quotes[i+j]['Date']) + ",",
+            # on determine si a monté ou baissé
+            if quotes[i+j]['Close'] - quotes[i+j]['Open'] > 0:
+                print "Up"
+                vec[(self.nbj-1)] = 1
+                # oo[u] = "Up"
+            else:
+                print "Down"
+                vec[(self.nbj-1)] = 0
+                # oo[u] = "Down"
+            if i == 0:
+                accu = vec
+            else:
+                accu = np.vstack((accu,vec))
+            u += 1
+            # accu = np.hstack(accu,oo)
+        self.dataNumpy = accu
+
+
+
+    def defineDomain(self):
+        classattr = Orange.feature.Discrete("class", values=["Up", "Down"])
+        features = []
+        i = 0
+        while i != self.nbj-1:
+            features.append(Orange.feature.Continuous("Open%d" % i))
+            # features.append(Orange.feature.Continuous("High%d" % i))
+            # features.append(Orange.feature.Continuous("Low%d" % i))
+            # features.append(Orange.feature.Continuous("Close%d" % i))
+            # features.append(Orange.feature.Continuous("Volume%d" % i))
+            i += 1
+        self.domain = Orange.data.Domain(features + [classattr])
+
+
+    def gainNormaliseParJour(self, data):
+        var = []
+        for elmt in data:
+            var.append(elmt["Close"] - elmt["Open"])
+        # on normalize
+        a=max(var)
+        o = []
+        for elt in var:
+            o.append(elt/a)
+        return o
+
 
     def movingaverage(self, interval, window_size):
         '''

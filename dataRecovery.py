@@ -51,6 +51,7 @@ from StringIO import StringIO
 import predictor
 
 
+
 CODES_YAHOO = {
     "a": "Ask",
     "a2": "Average Daily Volume",
@@ -368,12 +369,9 @@ def from_google_historical(symbol,start_date,end_date=datetime.date.today().isof
     end = datetime.date(int(end_date[0:4]),int(end_date[5:7]),int(end_date[8:10]))
     url = 'http://www.google.com/finance/historical?q={0}&startdate={1}&enddate={2}&output=csv'.format(
                       symbol,start.strftime('%b %d, %Y'),end.strftime('%b %d, %Y'))
-    print url
-    headers = { 'User-Agent' : "Opera/9.80 (X11; Linux i686; Ubuntu/14.10) Presto/2.12.388 Version/12.16" }
-    req = urllib2.Request(url, None, headers)
-    print req.get_full_url()
     r = requests.get(url)
-    data = np.genfromtxt(StringIO(r),delimiter=',')
+
+    data = np.genfromtxt(StringIO(r.text),names=True,delimiter=',',dtype=None)
     
     return data
 
@@ -496,7 +494,7 @@ def get(symbol, start_date=None, end_date=None):
                                         options.date_end))
     else:
         quotes.append(from_yahoo(symbol))
-        quotes.append(from_google(symbol))
+        quotes.append(from_google_info(symbol))
 
     return quotes
 
@@ -507,8 +505,8 @@ if __name__ == "__main__":
     # r = from_google_info("AAPL")
     # e = from_google_historical("AAPL","2005-05-05")
     
-    e = predictor()
-
+    e = predictor.predictor("AAPL")
+    print "test"
     '''
     import sys, os
 
