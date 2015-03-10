@@ -1,5 +1,7 @@
+# from __future__ import unicode_literals
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import traceback
 
 
 __author__ = 'korrigan'
@@ -20,7 +22,6 @@ import os
 import time
 import itertools
 import plotly.plotly as py
-from plotly.graph_objs import Scatter, Data, Bar, Layout, Figure
 
 from math import exp
 import matplotlib.pyplot as plt
@@ -78,12 +79,12 @@ class predictor(object):
     classifiers = {}
 
     """
-    Accueille les donn�es d'apprentissage.
+    Accueille les donnes d'apprentissage.
     """
     TrainData = None
 
     """
-    Stocke les donn�es de validation
+    Stocke les donnes de validation
     """
     ValidationData = None
 
@@ -112,21 +113,20 @@ class predictor(object):
         # self.trainData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateTrain, toDateTrain)
         # self.ValidationData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateValidation, toDateValidation)
         # self.postTreatmentDataset()
-        self.nbj = 30
-        self.Data = dataRecovery.from_google_historical("AAPL","2005-05-05")
+        self.nbj = 60
+        self.Data = dataRecovery.from_google_historical(symbol_of_stock,"2005-05-05")
         self.defineDomain()
         self.postTreatmentDataset(self.Data)
         self.dataOrange = Orange.data.Table(self.domain, self.dataNumpy)
         print "ok"
         learners = [
-            # neural.NeuralNetworkLearner(n_mid=250, reg_fact=0.01, max_iter=1000)
-            Orange.classification.bayes.NaiveLearner(),
-            Orange.classification.majority.MajorityLearner(),
-            Orange.ensemble.forest.RandomForestLearner(),
-            Orange.classification.svm.LinearSVMLearner(solver_type=Orange.classification.svm.LinearSVMLearner.L2R_L2LOSS_DUAL,
-                                                               C=1.0,
-                                                               eps=1,
-                                                               normalization=True),
+            # neural.NeuralNetworkLearner(n_mid=250, reg_fact=0.01, max_iter=1000),
+            Orange.classification.bayes.NaiveLearner()
+            # Orange.classification.majority.MajorityLearner(),
+            # Orange.classification.svm.LinearSVMLearner(solver_type=Orange.classification.svm.LinearSVMLearner.L2R_L2LOSS_DUAL,
+            #                                                    C=1.0,
+            #                                                    eps=1,
+            #                                                    normalization=True),
         ]
         cv = Orange.evaluation.testing.cross_validation(learners, self.dataOrange, folds=5)
         print "Accuracy:",
@@ -137,7 +137,7 @@ class predictor(object):
 
     def postTreatmentDataset(self, quotes):
         '''
-        Va generer les donnes "Open,High,Low,Close,Volume x 5 jours, plus le labelé (si le 6e jour ça monte ou pas)
+        Va generer les donnes "pen,High,Low,Close,Volume" 5 jours, plus le label (si le 6e jour ca monte ou pas)
         :return:
         '''
         # Date Open High Low Close Volume
@@ -149,25 +149,26 @@ class predictor(object):
         u = 0
         for i in l[::self.nbj]:
             j = 0
-            print "---"
+            # print "---"
+            # vec = np.zeros((self.nbj-1)*5+1)
             vec = np.zeros((self.nbj-1)+1)
             rr = self.gainNormaliseParJour(quotes[i:i+self.nbj-1])
             while j != self.nbj-1:
-                print quotes[i+j]['Date']
+                # print quotes[i+j]['\xef\xbb\xbfDate']
                 vec[j] = rr[j]
                 # vec[j*5 + 1] = quotes[i+j]['High']
                 # vec[j*5 + 2] = quotes[i+j]['Low']
                 # vec[j*5 + 3] = quotes[i+j]['Close']
                 # vec[j*5 + 4] = quotes[i+j]['Volume']
                 j += 1
-            print "to predict : " + str(quotes[i+j]['Date']) + ",",
-            # on determine si a monté ou baissé
+            # print "to predict : " + str(quotes[i+j]['\xef\xbb\xbfDate']) + ",",
+            # on determine si a mont ou baiss
             if quotes[i+j]['Close'] - quotes[i+j]['Open'] > 0:
-                print "Up"
+                # print "Up"
                 vec[(self.nbj-1)] = 1
                 # oo[u] = "Up"
             else:
-                print "Down"
+                # print "Down"
                 vec[(self.nbj-1)] = 0
                 # oo[u] = "Down"
             if i == 0:
@@ -181,7 +182,7 @@ class predictor(object):
 
 
     def defineDomain(self):
-        classattr = Orange.feature.Discrete("class", values=["Up", "Down"])
+        classattr = Orange.feature.Discrete("class", values=['Up','Down'])
         features = []
         i = 0
         while i != self.nbj-1:
@@ -224,4 +225,33 @@ class predictor(object):
 
 
 if __name__ == '__main__':
-    e = predictor('GSZ')
+    try:
+        e = predictor('GSZ')
+    except:
+        print traceback.format_exc()
+        pass
+    try:
+        e = predictor('AFL')
+    except:
+        print traceback.format_exc()
+        pass
+    try:
+        e = predictor('AZN')
+    except:
+        print traceback.format_exc()
+        pass
+    try:
+        e = predictor('CPLP')
+    except:
+        print traceback.format_exc()
+        pass
+    try:
+        e = predictor('CARO')
+    except:
+        print traceback.format_exc()
+        pass
+    try:
+        e = predictor('BONA')
+    except:
+        print traceback.format_exc()
+        pass

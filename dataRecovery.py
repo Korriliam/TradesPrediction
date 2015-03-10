@@ -1,5 +1,7 @@
+# from __future__ import unicode_literals
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import traceback
 
 """
 Gets stock quotes from Yahoo and Google Finance, and historical prices from Yahoo Finance.
@@ -49,6 +51,8 @@ import requests
 import numpy as np
 from StringIO import StringIO
 import predictor
+import sys
+import os
 
 
 
@@ -315,7 +319,7 @@ REUTERS_EXCHANGE_CODES = {
 
 GOOGLE_EXCHANGES = {
     "NYSE": "New York Stock Exchange",
-    "NASDAQ": "The NASDAQ Stock Market, Inc. – NASDAQ Last Sale",
+    "NASDAQ": "The NASDAQ Stock Market, Inc. - NASDAQ Last Sale",
     "NYSEAMEX": "NYSE AMEX",
     "NYSEARCA": "NYSE ARCA",
     "OTC": "FINRA OTC Bulletin Board",
@@ -324,8 +328,8 @@ GOOGLE_EXCHANGES = {
     "CVE": "Toronto TSX Ventures Exchange",
     "OPRA": "Option Chains",
     "LON": "London Stock Exchange",
-    "FRA": "Deutsche Börse Frankfurt Stock Exchange",
-    "ETR": "Deutsche Börse XETRA",
+    "FRA": "Deutsche Borse Frankfurt Stock Exchange",
+    "ETR": "Deutsche Borse XETRA",
     "BIT": "Borsa Italiana Milan Stock Exchange",
     "EPA": "NYSE Euronext Paris",
     "EBR": "NYSE Euronext Brussels",
@@ -370,8 +374,13 @@ def from_google_historical(symbol,start_date,end_date=datetime.date.today().isof
     url = 'http://www.google.com/finance/historical?q={0}&startdate={1}&enddate={2}&output=csv'.format(
                       symbol,start.strftime('%b %d, %Y'),end.strftime('%b %d, %Y'))
     r = requests.get(url)
+    k = StringIO(r.text.encode('utf-8'))
+    try:
+        data = np.genfromtxt(k,names=True,delimiter=',',dtype=None)
+    except:
+        print traceback.format_exc()
+        pass
 
-    data = np.genfromtxt(StringIO(r.text),names=True,delimiter=',',dtype=None)
     
     return data
 
