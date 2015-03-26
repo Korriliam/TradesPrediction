@@ -1,11 +1,13 @@
 # from __future__ import unicode_literals
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from StringIO import StringIO
 import traceback
 
 
 __author__ = 'korrigan'
 
+import pandas as pd
 import cPickle
 import numpy as np
 from matplotlib.pyplot import figure, show, plot, savefig, legend
@@ -115,18 +117,23 @@ class predictor(object):
         # self.postTreatmentDataset()
         self.nbj = 60
         self.Data = dataRecovery.from_google_historical(symbol_of_stock,"2005-05-05")
+        if len(self.Data) == 0:
+            print "data est vide"
+            exit()
         self.defineDomain()
         self.postTreatmentDataset(self.Data)
         self.dataOrange = Orange.data.Table(self.domain, self.dataNumpy)
-        print "ok"
+        # print "ok"
         learners = [
-            # neural.NeuralNetworkLearner(n_mid=250, reg_fact=0.01, max_iter=1000),
-            Orange.classification.bayes.NaiveLearner()
-            # Orange.classification.majority.MajorityLearner(),
-            # Orange.classification.svm.LinearSVMLearner(solver_type=Orange.classification.svm.LinearSVMLearner.L2R_L2LOSS_DUAL,
-            #                                                    C=1.0,
-            #                                                    eps=1,
-            #                                                    normalization=True),
+            neural.NeuralNetworkLearner(n_mid=250, reg_fact=0.01, max_iter=10000),
+            Orange.classification.bayes.NaiveLearner(),
+            Orange.classification.majority.MajorityLearner(),
+            Orange.classification.tree.SimpleTreeLearner(min_instances=20),
+            Orange.ensemble.forest.RandomForestLearner(),
+            Orange.classification.svm.LinearSVMLearner(solver_type=Orange.classification.svm.LinearSVMLearner.L2R_L2LOSS_DUAL,
+                                                               C=1.0,
+                                                               eps=1,
+                                                               normalization=True),
         ]
         cv = Orange.evaluation.testing.cross_validation(learners, self.dataOrange, folds=5)
         print "Accuracy:",
@@ -163,7 +170,17 @@ class predictor(object):
                 j += 1
             # print "to predict : " + str(quotes[i+j]['\xef\xbb\xbfDate']) + ",",
             # on determine si a mont ou baiss
-            if quotes[i+j]['Close'] - quotes[i+j]['Open'] > 0:
+
+            if not isinstance(quotes[i+j]['Close'], np.float):
+                a = np.float64(quotes[i+j]['Close'])
+            else:
+                a = quotes[i+j]['Close']
+            if not isinstance(quotes[i+j]['Open'], np.float):
+                b = np.float64(quotes[i+j]['Open'])
+            else:
+                b = quotes[i+j]['Open']
+
+            if a - b > 0:
                 # print "Up"
                 vec[(self.nbj-1)] = 1
                 # oo[u] = "Up"
@@ -198,7 +215,15 @@ class predictor(object):
     def gainNormaliseParJour(self, data):
         var = []
         for elmt in data:
-            var.append(elmt["Close"] - elmt["Open"])
+            try:
+                var.append(elmt["Close"] - elmt["Open"])
+            except:
+                try:
+                    ee = np.float(elmt["Close"])
+                    rr = np.float(elmt["Open"])
+                    var.append(ee-rr)
+                except:
+                    pass
         # on normalize
         a=max(var)
         o = []
@@ -225,33 +250,17 @@ class predictor(object):
 
 
 if __name__ == '__main__':
-    try:
-        e = predictor('GSZ')
-    except:
-        print traceback.format_exc()
-        pass
-    try:
-        e = predictor('AFL')
-    except:
-        print traceback.format_exc()
-        pass
-    try:
-        e = predictor('AZN')
-    except:
-        print traceback.format_exc()
-        pass
-    try:
-        e = predictor('CPLP')
-    except:
-        print traceback.format_exc()
-        pass
-    try:
-        e = predictor('CARO')
-    except:
-        print traceback.format_exc()
-        pass
-    try:
-        e = predictor('BONA')
-    except:
-        print traceback.format_exc()
-        pass
+
+
+    tab = pd.read_csv("companylist.csv", quotechar='"')
+    for elmt in tab['Symbol']:
+        print elmt,
+        try:
+            e = predictor(elmt)
+        except:
+            print " FAIL"
+            continue
+            # print traceback.format_exc()
+            # pass
+        print " OK"
+

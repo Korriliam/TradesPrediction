@@ -379,7 +379,9 @@ def from_google_historical(symbol,start_date,end_date=datetime.date.today().isof
         data = np.genfromtxt(k,names=True,delimiter=',',dtype=None)
     except:
         print traceback.format_exc()
+        print "%s not found" % symbol
         pass
+        exit()
 
     
     return data
