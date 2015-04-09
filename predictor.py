@@ -116,8 +116,8 @@ class predictor(object):
         # self.ValidationData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateValidation, toDateValidation)
         # self.postTreatmentDataset()
         self.nbj = 60
-        ssss = dataRecovery.historical_quotes(symbol_of_stock,"20050505","20140606")
-        self.Data = dataRecovery.from_google_historical(symbol_of_stock,"2005-05-05")
+        self.Data = dataRecovery.historical_quotes(symbol_of_stock,"20050505","20150408")
+        # self.Data = dataRecovery.from_google_historical(symbol_of_stock,"2005-05-05")
         print u"Date size : %s" % self.Data.size
         if len(self.Data) == 0:
             print "data est vide"
@@ -258,17 +258,17 @@ class predictor(object):
 if __name__ == '__main__':
 
 
-    tab = pd.read_csv("companylist.csv", quotechar='"')
-    # tab = pd.read_csv("cac40companyList.csv", quotechar='"')
+    # tab = pd.read_csv("companylist.csv", quotechar='"')
+    tab = pd.read_csv("cac40companyList.csv", quotechar='"')
     for elmt in tab['Symbol']:
-        print 'epa%3A'+elmt.split('.')[0],
+        print elmt
         try:
-            e = predictor(elmt.split('.')[0].upper())
+            e = predictor(elmt)
             # e = predictor('EPA%3A'+elmt.split('.')[0].upper())
 
         except:
             print " FAIL"
-            # print traceback.format_exc()
+            print traceback.format_exc()
             continue
         print " OK"
 

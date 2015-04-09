@@ -446,6 +446,7 @@ def historical_quotes(symbol, start_date, end_date):
               ))
 
     lines = urllib2.urlopen(url).readlines()
+    data = np.genfromtxt(lines,names=True,delimiter=',',dtype=None)
     csv_reader = csv.DictReader(lines[1:], fieldnames=lines[0].strip().split(","))
 
     prices = [dict(csv_line) for csv_line in csv_reader]
@@ -455,7 +456,7 @@ def historical_quotes(symbol, start_date, end_date):
         price_dict["source_url"] = url
         price_dict["source"] = "Yahoo!"
 
-    return prices
+    return data
 
 
 def format_quote(quote):
