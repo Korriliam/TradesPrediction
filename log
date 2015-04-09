@@ -1,0 +1,231 @@
+/usr/bin/python2.7 predictor.py
+ac.pa
+Date size : 2585
+Accuracy: ['0.4528', '0.4306', '0.5972', '0.5972', '0.5694', '0.5500']
+AUC: ['0.3633', '0.4200', '0.5000', '0.5000', '0.5500', '0.4917']
+Ended.
+ OK
+ai.pa
+Date size : 2585
+Accuracy: ['0.7611', '0.6667', '0.7389', '0.7389', '0.7139', '0.7111']
+AUC: ['0.6635', '0.5429', '0.5000', '0.5000', '0.4063', '0.5167']
+Ended.
+ OK
+alo.pa
+Date size : 2502
+Accuracy: ['0.5111', '0.5639', '0.6333', '0.6333', '0.5417', '0.4889']
+AUC: ['0.5467', '0.5644', '0.5000', '0.5000', '0.5333', '0.4267']
+Ended.
+ OK
+cs.pa
+Date size : 2580
+Accuracy: ['0.6500', '0.6889', '0.5722', '0.5722', '0.6222', '0.7639']
+AUC: ['0.6833', '0.7583', '0.5000', '0.5000', '0.6533', '0.7650']
+Ended.
+ OK
+bnp.pa
+Date size : 2585
+Accuracy: ['0.4972', '0.5333', '0.5222', '0.5222', '0.4333', '0.5389']
+AUC: ['0.5775', '0.5150', '0.5000', '0.5000', '0.4300', '0.5400']
+Ended.
+ OK
+en.pa
+Date size : 2579
+Accuracy: ['0.4972', '0.5444', '0.5222', '0.5222', '0.4917', '0.4972']
+AUC: ['0.5650', '0.6050', '0.5000', '0.5000', '0.4750', '0.5000']
+Ended.
+ OK
+cap.pa
+Date size : 2585
+Accuracy: ['0.5750', '0.5722', '0.5972', '0.5972', '0.5750', '0.5778']
+AUC: ['0.4700', '0.5767', '0.5000', '0.5000', '0.4833', '0.5067']
+Ended.
+ OK
+ca.pa
+Date size : 2585
+Accuracy: ['0.3778', '0.5944', '0.6417', '0.6417', '0.4972', '0.3528']
+AUC: ['0.2244', '0.3600', '0.5000', '0.5000', '0.2533', '0.3133']
+Ended.
+ OK
+ead.pa
+ FAIL
+Traceback (most recent call last):
+  File "predictor.py", line 266, in <module>
+    e = predictor(elmt)
+  File "predictor.py", line 119, in __init__
+    self.Data = dataRecovery.historical_quotes(symbol_of_stock,"20050505","20150408")
+  File "/home/korrigan/PycharmProjects/TradesPrediction/dataRecovery.py", line 448, in historical_quotes
+    lines = urllib2.urlopen(url).readlines()
+  File "/usr/lib/python2.7/urllib2.py", line 127, in urlopen
+    return _opener.open(url, data, timeout)
+  File "/usr/lib/python2.7/urllib2.py", line 410, in open
+    response = meth(req, response)
+  File "/usr/lib/python2.7/urllib2.py", line 523, in http_response
+    'http', request, response, code, msg, hdrs)
+  File "/usr/lib/python2.7/urllib2.py", line 448, in error
+    return self._call_chain(*args)
+  File "/usr/lib/python2.7/urllib2.py", line 382, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python2.7/urllib2.py", line 531, in http_error_default
+    raise HTTPError(req.get_full_url(), code, msg, hdrs, fp)
+HTTPError: HTTP Error 404: Not Found
+
+edf.pa
+Date size : 2423
+Accuracy: ['0.5571', '0.3643', '0.5643', '0.5643', '0.4321', '0.5321']
+AUC: ['0.6258', '0.3258', '0.5000', '0.5000', '0.5175', '0.5283']
+Ended.
+ OK
+ei.pa
+Date size : 2585
+Accuracy: ['0.5611', '0.3528', '0.5472', '0.5472', '0.3528', '0.5611']
+AUC: ['0.4908', '0.2192', '0.5000', '0.5000', '0.3017', '0.5567']
+Ended.
+ OK
+gsz.pa
+Date size : 2568
+Accuracy: ['0.3333', '0.4972', '0.5472', '0.5472', '0.4500', '0.4278']
+AUC: ['0.3733', '0.5367', '0.5000', '0.5000', '0.4100', '0.4367']
+Ended.
+ OK
+gto.pa
+Date size : 2583
+ FAIL
+Traceback (most recent call last):
+  File "predictor.py", line 266, in <module>
+    e = predictor(elmt)
+  File "predictor.py", line 140, in __init__
+    cv = Orange.evaluation.testing.cross_validation(learners, self.dataOrange, folds=5)
+  File "/usr/local/lib/python2.7/dist-packages/Orange/utils/__init__.py", line 214, in wrap_call
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/Orange/evaluation/testing.py", line 296, in cross_validation
+    store_examples=store_examples)
+  File "/usr/local/lib/python2.7/dist-packages/Orange/utils/__init__.py", line 214, in wrap_call
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/Orange/evaluation/testing.py", line 357, in test_with_indices
+    results, classifiers = self.one_fold_with_indices(learners, examples, fold, indices, preprocessors, weight)
+  File "/usr/local/lib/python2.7/dist-packages/Orange/evaluation/testing.py", line 388, in one_fold_with_indices
+    results = self._test_on_data(classifiers, test_set, testset_ids)
+  File "/usr/local/lib/python2.7/dist-packages/Orange/evaluation/testing.py", line 749, in _test_on_data
+    result = classifier(ex2, Orange.core.GetBoth)
+  File "/usr/local/lib/python2.7/dist-packages/Orange/classification/neural.py", line 309, in __call__
+    mt_value = Orange.data.Value(self.domain.class_var, cprob.values().index(max(cprob)))
+ValueError: nan is not in list
+
+ker.pa
+Date size : 2585
+Accuracy: ['0.5167', '0.5000', '0.5222', '0.5222', '0.6361', '0.4472']
+AUC: ['0.4825', '0.5350', '0.5000', '0.5000', '0.5225', '0.4450']
+Ended.
+ OK
+mc.pa
+Date size : 2585
+Accuracy: ['0.4694', '0.6611', '0.5472', '0.5472', '0.6194', '0.4972']
+AUC: ['0.4283', '0.7217', '0.5000', '0.5000', '0.5817', '0.4850']
+Ended.
+ OK
+ml.pa
+Date size : 2585
+Accuracy: ['0.3556', '0.3056', '0.5222', '0.5222', '0.5222', '0.4028']
+AUC: ['0.3975', '0.3413', '0.5000', '0.5000', '0.3950', '0.4000']
+Ended.
+ OK
+ora.pa
+Date size : 2585
+Accuracy: ['0.3833', '0.5250', '0.5222', '0.5222', '0.4278', '0.4500']
+AUC: ['0.3125', '0.5675', '0.5000', '0.5000', '0.4425', '0.4550']
+Ended.
+ OK
+ri.pa
+Date size : 2585
+Accuracy: ['0.4528', '0.6139', '0.5222', '0.5222', '0.5028', '0.4278']
+AUC: ['0.4650', '0.6975', '0.5000', '0.5000', '0.4825', '0.4250']
+Ended.
+ OK
+pub.pa
+Date size : 2585
+Accuracy: ['0.5472', '0.5028', '0.5472', '0.5472', '0.4972', '0.5528']
+AUC: ['0.6417', '0.5192', '0.5000', '0.5000', '0.5133', '0.5617']
+Ended.
+ OK
+rno.pa
+Date size : 2585
+Accuracy: ['0.6417', '0.6611', '0.5222', '0.5222', '0.6639', '0.5722']
+AUC: ['0.7925', '0.7050', '0.5000', '0.5000', '0.7900', '0.5700']
+Ended.
+ OK
+saf.pa
+Date size : 2585
+Accuracy: ['0.5222', '0.5278', '0.5472', '0.5472', '0.4917', '0.4750']
+AUC: ['0.6125', '0.3517', '0.5000', '0.5000', '0.4667', '0.4633']
+Ended.
+ OK
+san.pa
+Date size : 2585
+Accuracy: ['0.5528', '0.4556', '0.5472', '0.5472', '0.4500', '0.5972']
+AUC: ['0.4767', '0.4350', '0.5000', '0.5000', '0.4442', '0.5817']
+Ended.
+ OK
+su.pa
+Date size : 2585
+Accuracy: ['0.6028', '0.6750', '0.5972', '0.5972', '0.5750', '0.5306']
+AUC: ['0.4800', '0.6233', '0.5000', '0.5000', '0.5333', '0.4983']
+Ended.
+ OK
+gle.pa
+Date size : 2585
+Accuracy: ['0.6028', '0.6750', '0.5472', '0.5472', '0.6194', '0.5778']
+AUC: ['0.6158', '0.7300', '0.5000', '0.5000', '0.5358', '0.5500']
+Ended.
+ OK
+stm.pa
+Date size : 2565
+Accuracy: ['0.4056', '0.5250', '0.5222', '0.5222', '0.5944', '0.4028']
+AUC: ['0.5000', '0.5625', '0.5000', '0.5000', '0.6250', '0.4050']
+Ended.
+ OK
+tec.pa
+Date size : 2585
+Accuracy: ['0.8639', '0.6694', '0.6667', '0.6667', '0.6667', '0.6972']
+AUC: ['0.9222', '0.6878', '0.5000', '0.5000', '0.6644', '0.7033']
+Ended.
+ OK
+fp.pa
+Date size : 2585
+Accuracy: ['0.5667', '0.5806', '0.5222', '0.5222', '0.5667', '0.6417']
+AUC: ['0.6425', '0.5300', '0.5000', '0.5000', '0.5500', '0.6500']
+Ended.
+ OK
+ul.pa
+Date size : 2107
+Accuracy: ['0.5619', '0.5000', '0.4429', '0.4429', '0.4714', '0.5048']
+AUC: ['0.4833', '0.5917', '0.5000', '0.5000', '0.5833', '0.5000']
+Ended.
+ OK
+vk.pa
+Date size : 2585
+Accuracy: ['0.4472', '0.5639', '0.5222', '0.5222', '0.4500', '0.4528']
+AUC: ['0.4575', '0.5575', '0.5000', '0.5000', '0.4200', '0.4550']
+Ended.
+ OK
+vie.pa
+Date size : 2585
+Accuracy: ['0.5250', '0.4278', '0.5972', '0.5972', '0.5528', '0.4750']
+AUC: ['0.4533', '0.4733', '0.5000', '0.5000', '0.4933', '0.4583']
+Ended.
+ OK
+dg.pa
+Date size : 2585
+
+Accuracy: ['0.4306', '0.4806', '0.5222', '0.5222', '0.3583', '0.3583']
+AUC: ['0.3300', '0.4200', '0.5000', '0.5000', '0.4150', '0.3600']
+Ended.
+ OK
+viv.pa
+Date size : 2585
+Accuracy: ['0.4583', '0.5583', '0.6194', '0.6194', '0.6194', '0.5278']
+AUC: ['0.3778', '0.4800', '0.5000', '0.5000', '0.4067', '0.5050']
+Ended.
+ OK
+
+Process finished with exit code 0
