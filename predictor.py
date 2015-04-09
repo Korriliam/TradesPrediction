@@ -23,7 +23,7 @@ import random
 import os
 import time
 import itertools
-import plotly.plotly as py
+
 
 from math import exp
 import matplotlib.pyplot as plt
@@ -38,9 +38,9 @@ from Orange import tuning
 from Orange.classification import svm
 from Orange.classification import neural
 from Orange import ensemble
-from nltk.stem import SnowballStemmer
-from pycallgraph import PyCallGraph
-from pycallgraph.output import GraphvizOutput
+# from nltk.stem import SnowballStemmer
+# from pycallgraph import PyCallGraph
+# from pycallgraph.output import GraphvizOutput
 from Orange.evaluation import testing, scoring
 import operator
 
@@ -116,7 +116,9 @@ class predictor(object):
         # self.ValidationData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateValidation, toDateValidation)
         # self.postTreatmentDataset()
         self.nbj = 60
+        ssss = dataRecovery.historical_quotes(symbol_of_stock,"20050505","20140606")
         self.Data = dataRecovery.from_google_historical(symbol_of_stock,"2005-05-05")
+        print u"Date size : %s" % self.Data.size
         if len(self.Data) == 0:
             print "data est vide"
             exit()
@@ -136,10 +138,14 @@ class predictor(object):
                                                                normalization=True),
         ]
         cv = Orange.evaluation.testing.cross_validation(learners, self.dataOrange, folds=5)
+
+        accuTab = Orange.evaluation.scoring.CA(cv)
+        aucTab = Orange.evaluation.scoring.AUC(cv)
+
         print "Accuracy:",
-        print ["%.4f" % score for score in Orange.evaluation.scoring.CA(cv)]
+        print ["%.4f" % score for score in accuTab]
         print "AUC:",
-        print ["%.4f" % score for score in Orange.evaluation.scoring.AUC(cv)]
+        print ["%.4f" % score for score in aucTab]
         print "Ended."
 
     def postTreatmentDataset(self, quotes):
@@ -253,14 +259,16 @@ if __name__ == '__main__':
 
 
     tab = pd.read_csv("companylist.csv", quotechar='"')
+    # tab = pd.read_csv("cac40companyList.csv", quotechar='"')
     for elmt in tab['Symbol']:
-        print elmt,
+        print 'epa%3A'+elmt.split('.')[0],
         try:
-            e = predictor(elmt)
+            e = predictor(elmt.split('.')[0].upper())
+            # e = predictor('EPA%3A'+elmt.split('.')[0].upper())
+
         except:
             print " FAIL"
-            continue
             # print traceback.format_exc()
-            # pass
+            continue
         print " OK"
 

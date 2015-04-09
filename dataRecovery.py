@@ -373,6 +373,7 @@ def from_google_historical(symbol,start_date,end_date=datetime.date.today().isof
     end = datetime.date(int(end_date[0:4]),int(end_date[5:7]),int(end_date[8:10]))
     url = 'http://www.google.com/finance/historical?q={0}&startdate={1}&enddate={2}&output=csv'.format(
                       symbol,start.strftime('%b %d, %Y'),end.strftime('%b %d, %Y'))
+    print url
     r = requests.get(url)
     k = StringIO(r.text.encode('utf-8'))
     try:
@@ -380,7 +381,6 @@ def from_google_historical(symbol,start_date,end_date=datetime.date.today().isof
     except:
         print traceback.format_exc()
         print "%s not found" % symbol
-        pass
         exit()
 
     
@@ -407,6 +407,7 @@ def from_yahoo(symbol):
                          if v is not None])
     first_result["source_url"] = url
     first_result["source"] = "Yahoo!"
+    print url
     return first_result
 
 
