@@ -3,6 +3,7 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
 import traceback
+import fann_neural_with_orange
 
 
 __author__ = 'korrigan'
@@ -101,7 +102,8 @@ class predictor(object):
     regFact = 0.01
     nbnnIt = 1000
 
-    def __init__(self, symbol_of_stock, range_of_prediction=8, training_range = 500): 
+    def __init__(self, symbol_of_stock, nbj = 60, range_of_prediction=8, training_range = 500):
+
 
         fromDateTrain = datetime.utcnow() - timedelta(days=(training_range+range_of_prediction))#on donne le nb de jour avant auj ou on commence
         toDateTrain = datetime.utcnow() - timedelta(days=range_of_prediction)#on s'arrete tant de j avan auj
@@ -115,7 +117,7 @@ class predictor(object):
         # self.trainData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateTrain, toDateTrain)
         # self.ValidationData = self.dataRecovery.yahooDownloader(symbol_of_stock, fromDateValidation, toDateValidation)
         # self.postTreatmentDataset()
-        self.nbj = 60
+        self.nbj = nbj
         self.Data = dataRecovery.historical_quotes(symbol_of_stock,"20050505","20150408")
         # self.Data = dataRecovery.from_google_historical(symbol_of_stock,"2005-05-05")
         print u"Date size : %s" % self.Data.size
@@ -130,23 +132,33 @@ class predictor(object):
             neural.NeuralNetworkLearner(n_mid=250, reg_fact=0.01, max_iter=10000),
             Orange.classification.bayes.NaiveLearner(),
             Orange.classification.majority.MajorityLearner(),
-            Orange.classification.tree.SimpleTreeLearner(min_instances=20),
+            Orange.classification.tree.SimpleTreeLearner(min_instances=25),
             Orange.ensemble.forest.RandomForestLearner(),
             Orange.classification.svm.LinearSVMLearner(solver_type=Orange.classification.svm.LinearSVMLearner.L2R_L2LOSS_DUAL,
                                                                C=1.0,
                                                                eps=1,
                                                                normalization=True),
+            Orange.classification.knn.kNNLearner(
+                                distance_constructor=Orange.distance.Manhattan(),
+                                k=10
+	        ),
+            fann_neural_with_orange.FannNeuralLearner(),
+            # Orange.ensemble.boosting.BoostedLearner(Orange.classification.tree.SimpleTreeLearner(m_pruning=2, min_instances=5), name="jjj"),
+            # Orange.classification.tree.TreeLearner(),
         ]
         cv = Orange.evaluation.testing.cross_validation(learners, self.dataOrange, folds=5)
-
+        learner = ['nn','naivebaye','majority','simpletree','randomforest','linearsvm','knn','fann']
         accuTab = Orange.evaluation.scoring.CA(cv)
         aucTab = Orange.evaluation.scoring.AUC(cv)
 
-        print "Accuracy:",
-        print ["%.4f" % score for score in accuTab]
-        print "AUC:",
-        print ["%.4f" % score for score in aucTab]
-        print "Ended."
+
+
+        # print "Accuracy:",
+        # print ["%.4f" % score for score in accuTab]
+        # print "AUC:",
+        # print ["%.4f" % score for score in aucTab]
+        # print "Ended."
+        print "Best AUC : %s by %s" % (max(aucTab),learner[aucTab.index(max(aucTab))])
 
     def postTreatmentDataset(self, quotes):
         '''
@@ -202,7 +214,12 @@ class predictor(object):
             # accu = np.hstack(accu,oo)
         self.dataNumpy = accu
 
+    def TrainBestClassifier(self):
+        pass
 
+    def SaveClassifier(self,classifier,name):
+        with open("Classifier-"+name+".pkl","wb") as output:
+            pickle.dump(classifier,output,pickle.HIGHEST_PROTOCOL)
 
     def defineDomain(self):
         classattr = Orange.feature.Discrete("class", values=['Up','Down'])
@@ -260,10 +277,22 @@ if __name__ == '__main__':
 
     # tab = pd.read_csv("companylist.csv", quotechar='"')
     tab = pd.read_csv("cac40companyList.csv", quotechar='"')
-    for elmt in tab['Symbol']:
-        print elmt
+    for i,elmt in enumerate(tab['Symbol']):
+        print tab['Name'][i]
         try:
             e = predictor(elmt)
+            # e = predictor('EPA%3A'+elmt.split('.')[0].upper())
+
+        except:
+            print " FAIL"
+            print traceback.format_exc()
+            continue
+        print " OK"
+    print 'oooooooooooooooo'
+    for i,elmt in enumerate(tab['Symbol']):
+        print tab['Name'][i]
+        try:
+            e = predictor(elmt,100)
             # e = predictor('EPA%3A'+elmt.split('.')[0].upper())
 
         except:
