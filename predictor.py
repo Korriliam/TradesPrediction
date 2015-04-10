@@ -104,7 +104,6 @@ class predictor(object):
 
     def __init__(self, symbol_of_stock, nbj = 60, range_of_prediction=8, training_range = 500):
 
-
         fromDateTrain = datetime.utcnow() - timedelta(days=(training_range+range_of_prediction))#on donne le nb de jour avant auj ou on commence
         toDateTrain = datetime.utcnow() - timedelta(days=range_of_prediction)#on s'arrete tant de j avan auj
 
@@ -159,6 +158,8 @@ class predictor(object):
         # print ["%.4f" % score for score in aucTab]
         # print "Ended."
         print "Best AUC : %s by %s" % (max(aucTab),learner[aucTab.index(max(aucTab))])
+        self.bestauc = max(aucTab)
+        self.bestlearner = learner[aucTab.index(max(aucTab))]
 
     def postTreatmentDataset(self, quotes):
         '''
@@ -277,29 +278,28 @@ if __name__ == '__main__':
 
     # tab = pd.read_csv("companylist.csv", quotechar='"')
     tab = pd.read_csv("cac40companyList.csv", quotechar='"')
-    # for i,elmt in enumerate(tab['Symbol']):
-    #     print tab['Name'][i]
-    #     try:
-    #         e = predictor(elmt)
-    #         # e = predictor('EPA%3A'+elmt.split('.')[0].upper())
-    #
-    #     except:
-    #         print " FAIL"
-    #         print traceback.format_exc()
-    #         continue
-    #     print " OK"
-    # print 'oooooooooooooooo'
-    for i,elmt in enumerate(tab['Symbol']):
-        print tab['Name'][i]
-        try:
-            e = predictor(elmt,300)
-            # e = predictor('EPA%3A'+elmt.split('.')[0].upper())
+#     for i,elmt in enumerate(tab['Symbol']):
+#         print tab['Name'][i]
+#         try:
+#             e = predictor(elmt)
+#             # e = predictor('EPA%3A'+elmt.split('.')[0].upper    #())
 
-        except:
-            print " FAIL"
-            print traceback.format_exc()
-            continue
-        print " OK"
-
-
+#         except:
+#             print " FAIL"
+#             print traceback.format_exc()
+#             continue
+#         print " OK"
+#     print 'oooooooooooooooo'
+    with open('res.csv','a+') as output:
+        for i,elmt in enumerate(tab['Symbol']):
+            print tab['Name'][i]
+            try:
+                e = predictor(elmt,111)
+                # e = predictor('EPA%3A'+elmt.split('.')[0].upper())
+                output.write("%s,%s,%s,%s\n" % (tab['Name'][i],e.bestauc,e.bestlearner,e.nbj))
+            except:
+                print " FAIL"
+                print traceback.format_exc()
+                continue
+            print " OK"
 
