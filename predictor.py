@@ -277,10 +277,22 @@ if __name__ == '__main__':
 
     # tab = pd.read_csv("companylist.csv", quotechar='"')
     tab = pd.read_csv("cac40companyList.csv", quotechar='"')
+    # for i,elmt in enumerate(tab['Symbol']):
+    #     print tab['Name'][i]
+    #     try:
+    #         e = predictor(elmt)
+    #         # e = predictor('EPA%3A'+elmt.split('.')[0].upper())
+    #
+    #     except:
+    #         print " FAIL"
+    #         print traceback.format_exc()
+    #         continue
+    #     print " OK"
+    # print 'oooooooooooooooo'
     for i,elmt in enumerate(tab['Symbol']):
         print tab['Name'][i]
         try:
-            e = predictor(elmt)
+            e = predictor(elmt,300)
             # e = predictor('EPA%3A'+elmt.split('.')[0].upper())
 
         except:
@@ -288,16 +300,6 @@ if __name__ == '__main__':
             print traceback.format_exc()
             continue
         print " OK"
-    print 'oooooooooooooooo'
-    for i,elmt in enumerate(tab['Symbol']):
-        print tab['Name'][i]
-        try:
-            e = predictor(elmt,100)
-            # e = predictor('EPA%3A'+elmt.split('.')[0].upper())
 
-        except:
-            print " FAIL"
-            print traceback.format_exc()
-            continue
-        print " OK"
+
 
