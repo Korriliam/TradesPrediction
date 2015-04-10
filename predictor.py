@@ -103,7 +103,7 @@ class predictor(object):
     nbnnIt = 1000
 
     def __init__(self, symbol_of_stock, nbj = 60, range_of_prediction=8, training_range = 500):
-
+        self.symbol  = symbol_of_stock
         fromDateTrain = datetime.utcnow() - timedelta(days=(training_range+range_of_prediction))#on donne le nb de jour avant auj ou on commence
         toDateTrain = datetime.utcnow() - timedelta(days=range_of_prediction)#on s'arrete tant de j avan auj
 
@@ -147,6 +147,8 @@ class predictor(object):
         ]
         cv = Orange.evaluation.testing.cross_validation(learners, self.dataOrange, folds=5)
         learner = ['nn','naivebaye','majority','simpletree','randomforest','linearsvm','knn','fann']
+        self.learner = learner
+        self.learners = learners
         accuTab = Orange.evaluation.scoring.CA(cv)
         aucTab = Orange.evaluation.scoring.AUC(cv)
 
@@ -216,11 +218,16 @@ class predictor(object):
         self.dataNumpy = accu
 
     def TrainBestClassifier(self):
-        pass
+        learner = self.learners[self.learner.index(self.bestlearner)]
+        classifier = learner(self.dataOrange)
+
+        self.classifier = classifier
+        self.SaveClassifier(self.classifier,self.bestlearner)
 
     def SaveClassifier(self,classifier,name):
         with open("Classifier-"+name+".pkl","wb") as output:
             pickle.dump(classifier,output,pickle.HIGHEST_PROTOCOL)
+        print "Classifier saved to %s" % "Classifier-"+name+"-"+str(self.symbol)+"-"+str(self.nbj)+"-"+str(self.bestauc)+".pkl"
 
     def defineDomain(self):
         classattr = Orange.feature.Discrete("class", values=['Up','Down'])
@@ -278,18 +285,6 @@ if __name__ == '__main__':
 
     # tab = pd.read_csv("companylist.csv", quotechar='"')
     tab = pd.read_csv("cac40companyList.csv", quotechar='"')
-#     for i,elmt in enumerate(tab['Symbol']):
-#         print tab['Name'][i]
-#         try:
-#             e = predictor(elmt)
-#             # e = predictor('EPA%3A'+elmt.split('.')[0].upper    #())
-
-#         except:
-#             print " FAIL"
-#             print traceback.format_exc()
-#             continue
-#         print " OK"
-#     print 'oooooooooooooooo'
     with open('res.csv','a+') as output:
         for i,elmt in enumerate(tab['Symbol']):
             print tab['Name'][i]
@@ -297,6 +292,7 @@ if __name__ == '__main__':
                 e = predictor(elmt,111)
                 # e = predictor('EPA%3A'+elmt.split('.')[0].upper())
                 output.write("%s,%s,%s,%s\n" % (tab['Name'][i],e.bestauc,e.bestlearner,e.nbj))
+                e.TrainBestClassifier()
             except:
                 print " FAIL"
                 print traceback.format_exc()
