@@ -57,3 +57,488 @@ Vallourec,0.6,fann,111
 Veolia Environ.,0.841666666667,naivebaye,111
 Vinci,0.7,randomforest,111
 Vivendi,0.583333333333,randomforest,111
+Accor,0.633333333333,naivebaye,111
+Air Liquide,0.75,randomforest,111
+Alstom,0.766666666667,randomforest,111
+AXA,0.566666666667,fann,111
+BNP Paribas,0.833333333333,naivebaye,111
+Bouygues,0.633333333333,linearsvm,111
+Cap Gemini,0.716666666667,naivebaye,111
+Carrefour,0.758333333333,naivebaye,111
+EDF,0.883333333333,fann,111
+Essilor INTL,0.7,fann,111
+GDF Suez,0.633333333333,naivebaye,111
+Kering,0.766666666667,fann,111
+LVMH,0.566666666667,knn,111
+Michelin,0.883333333333,randomforest,111
+Orange,0.716666666667,fann,111
+Pernod Ricard,0.816666666667,randomforest,111
+Publicis Groupe,0.833333333333,randomforest,111
+Renault,0.566666666667,knn,111
+Safran,0.666666666667,knn,111
+Sanofi,0.75,randomforest,111
+Schneider Electric,0.683333333333,fann,111
+Societe Generale,0.5,majority,111
+STMicroelectronics,0.8,randomforest,111
+Technip,0.616666666667,randomforest,111
+Total,0.5,majority,111
+Vallourec,0.633333333333,fann,111
+Veolia Environ.,0.841666666667,naivebaye,111
+Vinci,0.7,randomforest,111
+Vivendi,0.583333333333,randomforest,111
+Accor,0.535714285714,naivebaye,50
+Air Liquide,0.654761904762,linearsvm,50
+Alstom,0.656,randomforest,50
+AXA,0.603666666667,randomforest,50
+BNP Paribas,0.619,randomforest,50
+Bouygues,0.545333333333,knn,50
+Cap Gemini,0.504,knn,50
+Carrefour,0.685714285714,nn,50
+EADS,0.534,knn,50
+EDF,0.5,majority,50
+Essilor INTL,0.570238095238,nn,50
+GDF Suez,0.5,majority,50
+Kering,0.5,majority,50
+LVMH,0.583333333333,linearsvm,50
+Michelin,0.549333333333,knn,50
+Orange,0.62380952381,naivebaye,50
+Pernod Ricard,0.5,majority,50
+Publicis Groupe,0.5,majority,50
+Renault,0.5,majority,50
+Safran,0.5,majority,50
+Sanofi,0.701,fann,50
+Schneider Electric,0.694047619048,linearsvm,50
+Societe Generale,0.5,majority,50
+STMicroelectronics,0.626,naivebaye,50
+Technip,0.642333333333,nn,50
+Total,0.636666666667,randomforest,50
+Unibail,0.623333333333,linearsvm,50
+Vallourec,0.566333333333,knn,50
+Veolia Environ.,0.66,knn,50
+Vinci,0.657666666667,naivebaye,50
+Vivendi,0.55,linearsvm,50
+Accor,0.5,majority,120
+Air Liquide,0.666666666667,fann,120
+AXA,0.716666666667,knn,120
+BNP Paribas,0.5,majority,120
+Bouygues,0.733333333333,randomforest,120
+Cap Gemini,0.55,naivebaye,120
+Carrefour,0.733333333333,naivebaye,120
+EDF,0.633333333333,randomforest,120
+Essilor INTL,0.633333333333,randomforest,120
+GDF Suez,0.5,majority,120
+Kering,0.5,majority,120
+LVMH,0.8,fann,120
+Michelin,0.75,randomforest,120
+Orange,0.616666666667,linearsvm,120
+Pernod Ricard,0.5,majority,120
+Publicis Groupe,0.5,majority,120
+Renault,0.633333333333,randomforest,120
+Safran,0.683333333333,nn,120
+Sanofi,0.666666666667,randomforest,120
+Schneider Electric,0.616666666667,knn,120
+Societe Generale,0.8,nn,120
+STMicroelectronics,0.5,majority,120
+Technip,0.8,knn,120
+Total,0.716666666667,linearsvm,120
+Unibail,0.7,nn,120
+Vallourec,0.733333333333,nn,120
+Veolia Environ.,0.5,majority,120
+Vinci,0.666666666667,fann,120
+Vivendi,0.716666666667,randomforest,120
+Accor,0.6,naivebaye,100
+Air Liquide,0.633333333333,randomforest,100
+Alstom,0.833333333333,fann,100
+AXA,0.766666666667,naivebaye,100
+BNP Paribas,0.6,knn,100
+Bouygues,0.633333333333,nn,100
+Cap Gemini,0.533333333333,linearsvm,100
+Carrefour,0.733333333333,randomforest,100
+EDF,0.566666666667,fann,100
+Essilor INTL,0.766666666667,naivebaye,100
+GDF Suez,0.5,majority,100
+Kering,0.866666666667,randomforest,100
+LVMH,0.666666666667,fann,100
+Michelin,0.633333333333,nn,100
+Orange,0.6,randomforest,100
+Pernod Ricard,0.633333333333,randomforest,100
+Publicis Groupe,0.55,naivebaye,100
+Renault,0.566666666667,linearsvm,100
+Safran,0.6,randomforest,100
+Sanofi,0.5,majority,100
+Schneider Electric,0.866666666667,fann,100
+Societe Generale,0.633333333333,fann,100
+STMicroelectronics,0.666666666667,knn,100
+Technip,0.8,naivebaye,100
+Total,0.566666666667,knn,100
+Unibail,0.85,nn,100
+Vallourec,0.683333333333,naivebaye,100
+Veolia Environ.,0.683333333333,naivebaye,100
+Vinci,0.716666666667,randomforest,100
+Vivendi,0.5,majority,100
+Accor,0.6,naivebaye,100
+Air Liquide,0.633333333333,randomforest,100
+AXA,0.766666666667,naivebaye,100
+BNP Paribas,0.6,knn,100
+Bouygues,0.633333333333,nn,100
+Cap Gemini,0.533333333333,linearsvm,100
+Carrefour,0.733333333333,randomforest,100
+EADS,0.633333333333,knn,100
+EDF,0.516666666667,linearsvm,100
+Essilor INTL,0.766666666667,naivebaye,100
+GDF Suez,0.5,majority,100
+Kering,0.866666666667,randomforest,100
+LVMH,0.566666666667,nn,100
+Michelin,0.633333333333,nn,100
+Orange,0.633333333333,fann,100
+Pernod Ricard,0.633333333333,randomforest,100
+Publicis Groupe,0.55,naivebaye,100
+Renault,0.566666666667,linearsvm,100
+Safran,0.6,randomforest,100
+Sanofi,0.5,majority,100
+Schneider Electric,0.866666666667,fann,100
+Societe Generale,0.533333333333,fann,100
+STMicroelectronics,0.666666666667,knn,100
+Technip,0.8,naivebaye,100
+Total,0.566666666667,knn,100
+Unibail,0.85,nn,100
+Vallourec,0.683333333333,naivebaye,100
+Veolia Environ.,0.683333333333,naivebaye,100
+Vinci,0.716666666667,randomforest,100
+Vivendi,0.5,majority,100
+Accor,0.6,naivebaye,100
+Air Liquide,0.633333333333,randomforest,100
+Alstom,0.8,fann,100
+AXA,0.766666666667,naivebaye,100
+BNP Paribas,0.6,knn,100
+Bouygues,0.633333333333,nn,100
+Cap Gemini,0.533333333333,linearsvm,100
+Carrefour,0.733333333333,randomforest,100
+EADS,0.633333333333,knn,100
+EDF,0.516666666667,linearsvm,100
+Essilor INTL,0.766666666667,naivebaye,100
+GDF Suez,0.5,majority,100
+Kering,0.866666666667,randomforest,100
+LVMH,0.566666666667,nn,100
+Michelin,0.633333333333,nn,100
+Orange,0.6,fann,100
+Pernod Ricard,0.633333333333,randomforest,100
+Publicis Groupe,0.55,naivebaye,100
+Renault,0.566666666667,linearsvm,100
+Safran,0.6,randomforest,100
+Sanofi,0.5,majority,100
+Schneider Electric,0.9,fann,100
+Societe Generale,0.533333333333,fann,100
+STMicroelectronics,0.666666666667,knn,100
+Technip,0.8,naivebaye,100
+Total,0.566666666667,knn,100
+Unibail,0.85,nn,100
+Vallourec,0.683333333333,naivebaye,100
+Veolia Environ.,0.683333333333,naivebaye,100
+Vinci,0.716666666667,randomforest,100
+Vivendi,0.5,majority,100
+Accor,0.6,naivebaye,100
+Air Liquide,0.633333333333,randomforest,100
+Alstom,0.866666666667,fann,100
+AXA,0.766666666667,naivebaye,100
+BNP Paribas,0.6,knn,100
+Bouygues,0.633333333333,nn,100
+Cap Gemini,0.533333333333,linearsvm,100
+Carrefour,0.733333333333,randomforest,100
+EADS,0.633333333333,knn,100
+EDF,0.516666666667,linearsvm,100
+Essilor INTL,0.766666666667,naivebaye,100
+GDF Suez,0.5,majority,100
+Kering,0.866666666667,randomforest,100
+LVMH,0.566666666667,nn,100
+Michelin,0.633333333333,nn,100
+Orange,0.6,randomforest,100
+Pernod Ricard,0.633333333333,randomforest,100
+Publicis Groupe,0.566666666667,fann,100
+Renault,0.566666666667,linearsvm,100
+Safran,0.6,randomforest,100
+Sanofi,0.5,majority,100
+Schneider Electric,0.85,linearsvm,100
+Societe Generale,0.533333333333,fann,100
+STMicroelectronics,0.666666666667,knn,100
+Technip,0.8,naivebaye,100
+Total,0.566666666667,knn,100
+Unibail,0.85,nn,100
+Vallourec,0.683333333333,naivebaye,100
+Veolia Environ.,0.683333333333,naivebaye,100
+Vinci,0.716666666667,randomforest,100
+Vivendi,0.5,majority,100
+Accor,0.6,naivebaye,100
+Alstom,0.8,fann,100
+AXA,0.766666666667,naivebaye,100
+BNP Paribas,0.6,knn,100
+Bouygues,0.633333333333,nn,100
+Cap Gemini,0.533333333333,linearsvm,100
+Carrefour,0.733333333333,randomforest,100
+EADS,0.633333333333,knn,100
+EDF,0.516666666667,linearsvm,100
+Essilor INTL,0.766666666667,naivebaye,100
+GDF Suez,0.5,majority,100
+Kering,0.866666666667,randomforest,100
+LVMH,0.6,fann,100
+Michelin,0.633333333333,nn,100
+Orange,0.6,randomforest,100
+Pernod Ricard,0.633333333333,randomforest,100
+Publicis Groupe,0.55,naivebaye,100
+Renault,0.566666666667,linearsvm,100
+Safran,0.6,randomforest,100
+Sanofi,0.5,majority,100
+Schneider Electric,0.866666666667,fann,100
+Societe Generale,0.566666666667,fann,100
+STMicroelectronics,0.666666666667,knn,100
+Technip,0.8,naivebaye,100
+Total,0.566666666667,knn,100
+Unibail,0.85,nn,100
+Vallourec,0.683333333333,naivebaye,100
+Veolia Environ.,0.683333333333,naivebaye,100
+Vinci,0.733333333333,fann,100
+Vivendi,0.5,majority,100
+Accor,0.6,naivebaye,100
+Air Liquide,0.633333333333,randomforest,100
+Alstom,0.8,fann,100
+AXA,0.766666666667,naivebaye,100
+BNP Paribas,0.6,knn,100
+Bouygues,0.633333333333,nn,100
+Cap Gemini,0.533333333333,linearsvm,100
+Carrefour,0.733333333333,randomforest,100
+EDF,0.533333333333,fann,100
+Essilor INTL,0.766666666667,naivebaye,100
+GDF Suez,0.5,majority,100
+Kering,0.866666666667,randomforest,100
+LVMH,0.566666666667,nn,100
+Michelin,0.633333333333,nn,100
+Orange,0.6,randomforest,100
+Pernod Ricard,0.633333333333,randomforest,100
+Publicis Groupe,0.55,naivebaye,100
+Renault,0.566666666667,linearsvm,100
+Safran,0.6,randomforest,100
+Sanofi,0.5,majority,100
+Schneider Electric,0.85,linearsvm,100
+Societe Generale,0.5,majority,100
+STMicroelectronics,0.666666666667,knn,100
+Technip,0.8,naivebaye,100
+Total,0.566666666667,knn,100
+Unibail,0.85,nn,100
+Vallourec,0.683333333333,naivebaye,100
+Veolia Environ.,0.683333333333,naivebaye,100
+Vinci,0.716666666667,randomforest,100
+Vivendi,0.5,majority,100
+Accor,0.6,naivebaye,100
+Alstom,0.866666666667,fann,100
+AXA,0.766666666667,naivebaye,100
+BNP Paribas,0.6,knn,100
+Bouygues,0.633333333333,nn,100
+Cap Gemini,0.533333333333,linearsvm,100
+Carrefour,0.733333333333,randomforest,100
+EDF,0.6,fann,100
+Essilor INTL,0.766666666667,naivebaye,100
+GDF Suez,0.5,majority,100
+Kering,0.866666666667,randomforest,100
+LVMH,0.633333333333,fann,100
+Michelin,0.633333333333,nn,100
+Orange,0.666666666667,fann,100
+Pernod Ricard,0.633333333333,randomforest,100
+Publicis Groupe,0.55,naivebaye,100
+Renault,0.566666666667,linearsvm,100
+Safran,0.6,randomforest,100
+Sanofi,0.5,majority,100
+Schneider Electric,0.866666666667,fann,100
+Societe Generale,0.5,majority,100
+STMicroelectronics,0.666666666667,knn,100
+Technip,0.8,naivebaye,100
+Total,0.566666666667,knn,100
+Unibail,0.85,nn,100
+Vallourec,0.683333333333,naivebaye,100
+Veolia Environ.,0.683333333333,naivebaye,100
+Vinci,0.716666666667,randomforest,100
+Vivendi,0.5,majority,100
+Accor,0.6,naivebaye,100
+Air Liquide,0.633333333333,randomforest,100
+Alstom,0.766666666667,fann,100
+AXA,0.766666666667,naivebaye,100
+BNP Paribas,0.6,knn,100
+Bouygues,0.633333333333,nn,100
+Cap Gemini,0.533333333333,linearsvm,100
+Carrefour,0.733333333333,randomforest,100
+EDF,0.6,fann,100
+Essilor INTL,0.766666666667,naivebaye,100
+GDF Suez,0.5,majority,100
+Kering,0.866666666667,randomforest,100
+LVMH,0.666666666667,fann,100
+Michelin,0.633333333333,nn,100
+Orange,0.6,randomforest,100
+Pernod Ricard,0.633333333333,randomforest,100
+Publicis Groupe,0.55,naivebaye,100
+Renault,0.566666666667,linearsvm,100
+Safran,0.6,randomforest,100
+Sanofi,0.5,majority,100
+Schneider Electric,0.866666666667,fann,100
+Societe Generale,0.5,majority,100
+STMicroelectronics,0.666666666667,knn,100
+Technip,0.8,naivebaye,100
+Total,0.566666666667,knn,100
+Unibail,0.85,nn,100
+Vallourec,0.683333333333,naivebaye,100
+Veolia Environ.,0.683333333333,naivebaye,100
+Vinci,0.716666666667,randomforest,100
+Vivendi,0.5,majority,100
+Accor,0.520833333333,randomforest,70
+Accor,0.566666666667,linearsvm,90
+Accor,0.55,nn,110
+Accor,0.6,fann,150
+Accor,0.5,majority,170
+Air Liquide,0.733333333333,knn,70
+Air Liquide,0.566666666667,linearsvm,90
+Air Liquide,0.666666666667,randomforest,110
+Air Liquide,0.5,linearsvm,150
+Air Liquide,0.7,randomforest,170
+Alstom,0.6,naivebaye,70
+Alstom,0.733333333333,randomforest,90
+Alstom,0.766666666667,nn,110
+Alstom,0.5,majority,130
+AXA,0.65,fann,70
+AXA,0.833333333333,knn,90
+AXA,0.533333333333,linearsvm,110
+AXA,0.75,naivebaye,150
+AXA,0.8,knn,170
+BNP Paribas,0.65,randomforest,70
+BNP Paribas,0.777777777778,knn,90
+BNP Paribas,0.5,majority,110
+BNP Paribas,0.6,fann,150
+BNP Paribas,0.6,randomforest,170
+Bouygues,0.5,majority,70
+Bouygues,0.622222222222,knn,90
+Bouygues,0.8,knn,110
+Bouygues,0.55,randomforest,150
+Bouygues,0.7,naivebaye,170
+Cap Gemini,0.741666666667,knn,70
+Cap Gemini,0.933333333333,fann,90
+Cap Gemini,0.75,naivebaye,110
+Cap Gemini,0.5,naivebaye,150
+Cap Gemini,0.8,knn,170
+Carrefour,0.575,knn,70
+Carrefour,0.9,knn,90
+Carrefour,0.65,linearsvm,110
+Carrefour,0.833333333333,naivebaye,150
+Carrefour,0.8,randomforest,170
+EADS,0.811111111111,randomforest,90
+EDF,0.65,knn,70
+EDF,0.555555555556,randomforest,90
+EDF,0.766666666667,randomforest,110
+EDF,0.55,naivebaye,130
+EDF,0.7,randomforest,150
+EDF,0.5,nn,170
+Essilor INTL,0.616666666667,nn,70
+Essilor INTL,0.5,majority,90
+Essilor INTL,0.5,majority,110
+Essilor INTL,0.5,majority,150
+Essilor INTL,1.0,nn,170
+GDF Suez,0.693333333333,randomforest,70
+GDF Suez,0.8,naivebaye,90
+GDF Suez,0.5,majority,110
+GDF Suez,0.533333333333,fann,130
+GDF Suez,0.633333333333,randomforest,150
+GDF Suez,0.7,randomforest,170
+Kering,0.6,randomforest,70
+Kering,0.7,linearsvm,90
+Kering,0.525,naivebaye,110
+Kering,0.55,naivebaye,150
+Kering,0.9,randomforest,170
+LVMH,0.533333333333,fann,70
+LVMH,0.5,majority,90
+LVMH,0.816666666667,fann,110
+LVMH,0.5,nn,150
+LVMH,0.9,naivebaye,170
+Michelin,0.6375,naivebaye,70
+Michelin,0.5,majority,90
+Michelin,0.65,fann,110
+Michelin,0.5,majority,150
+Michelin,0.6,nn,170
+Orange,0.79,naivebaye,70
+Orange,0.566666666667,fann,90
+Orange,0.733333333333,knn,110
+Orange,0.557692307692,fann,150
+Orange,0.8,knn,170
+Pernod Ricard,0.675,knn,70
+Pernod Ricard,0.691666666667,knn,90
+Pernod Ricard,0.5,majority,110
+Pernod Ricard,0.95,randomforest,150
+Pernod Ricard,0.8,randomforest,170
+Publicis Groupe,0.504166666667,fann,70
+Publicis Groupe,0.744444444444,naivebaye,90
+Publicis Groupe,0.716666666667,naivebaye,110
+Publicis Groupe,0.716666666667,randomforest,150
+Publicis Groupe,1.0,nn,170
+Renault,0.5,knn,70
+Renault,0.8,nn,90
+Renault,0.5,majority,110
+Renault,0.5,majority,150
+Renault,0.7,fann,170
+Safran,0.5,majority,70
+Safran,0.811111111111,naivebaye,90
+Safran,0.666666666667,naivebaye,110
+Safran,0.6,fann,150
+Safran,0.8,randomforest,170
+Sanofi,0.703333333333,naivebaye,70
+Sanofi,0.675,fann,90
+Sanofi,0.75,knn,110
+Sanofi,0.6,knn,150
+Sanofi,0.9,fann,170
+Schneider Electric,0.623333333333,linearsvm,70
+Schneider Electric,0.522222222222,naivebaye,90
+Schneider Electric,0.716666666667,naivebaye,110
+Schneider Electric,0.7,knn,150
+Schneider Electric,0.8,randomforest,170
+Societe Generale,0.833333333333,knn,70
+Societe Generale,0.55,linearsvm,90
+Societe Generale,0.816666666667,knn,110
+Societe Generale,0.7,fann,150
+Societe Generale,1.0,nn,170
+STMicroelectronics,0.5,majority,70
+STMicroelectronics,0.616666666667,fann,90
+STMicroelectronics,0.616666666667,fann,110
+STMicroelectronics,0.75,naivebaye,130
+STMicroelectronics,0.75,randomforest,150
+STMicroelectronics,0.704545454545,fann,170
+Technip,0.5,majority,70
+Technip,0.65,fann,90
+Technip,0.916666666667,nn,110
+Technip,0.8,nn,150
+Technip,0.5,majority,170
+Total,0.635416666667,knn,70
+Total,0.777777777778,nn,90
+Total,0.65,linearsvm,110
+Total,0.566666666667,nn,150
+Total,0.8,knn,170
+Unibail,0.5,majority,70
+Unibail,0.633333333333,naivebaye,90
+Unibail,0.5,majority,110
+Unibail,0.8,naivebaye,130
+Unibail,1.0,nn,150
+Unibail,0.5,majority,170
+Vallourec,0.583333333333,naivebaye,70
+Vallourec,0.8,fann,90
+Vallourec,0.883333333333,fann,110
+Vallourec,0.7,nn,150
+Vallourec,0.7,nn,170
+Veolia Environ.,0.60625,knn,70
+Veolia Environ.,0.505555555556,knn,90
+Veolia Environ.,0.5,majority,110
+Veolia Environ.,0.6,naivebaye,150
+Veolia Environ.,0.5,majority,170
+Vinci,0.725,naivebaye,70
+Vinci,0.555555555556,knn,90
+Vinci,0.6,fann,110
+Vinci,0.6,fann,150
+Vinci,0.85,linearsvm,170
+Vivendi,0.513333333333,randomforest,70
+Vivendi,0.5,majority,90
+Vivendi,0.633333333333,randomforest,110
+Vivendi,0.75,randomforest,150
+Vivendi,0.6,linearsvm,170
+Unibail,0.25,linearsvm,700
