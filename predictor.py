@@ -12,13 +12,12 @@ import pandas as pd
 import numpy as np
 from matplotlib.pyplot import figure, show, plot, savefig, legend
 import dataRecovery
-from datetime import datetime, date, time, timedelta
 from math import ceil
 from pybrain.datasets import SupervisedDataSet
 from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
 import cPickle as pickle
-from datetime import datetime
+import datetime
 import random
 import os
 import time
@@ -52,7 +51,7 @@ class predictor(object):
     debugBis = True  # niveau 2
     debugTer = True  # niveau 1
 
-
+    RejectWeekend = False
 
     availableClassifiersPerInstance = {
         "SVM": False,
@@ -144,12 +143,13 @@ class predictor(object):
                                     distance_constructor=Orange.distance.Manhattan(),
                                     k=10
                 ),
-                fann_neural_with_orange.FannNeuralLearner(),
+                # fann_neural_with_orange.FannNeuralLearner(),
             ]
 
             learner = ['nn','naivebaye','majority','simpletree','randomforest','linearsvm','knn','fann']
             self.learner = learner
             self.learners = learners
+
 
     def postTreatmentDataset(self, quotes,forReal = False):
         '''
@@ -157,15 +157,17 @@ class predictor(object):
         :return:
         '''
         # Date Open High Low Close Volume
-        variations = []
         size = quotes.shape[0]
         l = range(size-100)
+        if self.RejectWeekend:
+            quotes = [lines for lines in quotes if not isWeekend(lines[0])]
         quotes = quotes[::-1] # on inverse l'ordre
-        # oo = np.zeros(ceil(size/10))
         u = 0
         if forReal:
             vec = np.zeros((self.nbj-1)+1)
-            quotes = quotes[-self.nbj:]
+            if self.RejectWeekend:
+                quotes = [lines for lines in quotes if isWeekend(lines[0])]
+            quotes = quotes[-self.nbj:] # on prend juste ce qui nous est utile (les self.nbj dernier jours)
             j = 0
             rr = self.gainNormaliseParJour(quotes)
             while j != self.nbj-1:
@@ -207,10 +209,12 @@ class predictor(object):
                     # print "Up"
                     vec[(self.nbj-1)] = 1
                     # oo[u] = "Up"
-                else:
+                elif b - a > 0:
                     # print "Down"
                     vec[(self.nbj-1)] = 0
                     # oo[u] = "Down"
+                else:
+                    vec[(self.nbj-1)] = 0.5
                 if i == 0:
                     accu = vec
                 else:
@@ -234,6 +238,7 @@ class predictor(object):
         try:
             cv = Orange.evaluation.testing.cross_validation(self.learners, self.dataOrange, folds=5)
         except ValueError:
+            print traceback.format_exc()
             print self.dataOrange
         accuTab = Orange.evaluation.scoring.CA(cv)
         aucTab = Orange.evaluation.scoring.AUC(cv)
@@ -266,7 +271,11 @@ class predictor(object):
         self.classifier = classifier
 
     def SaveClassifier(self,classifier,name):
-        with open("Classifier-"+name+"-"+str(self.symbol)+"-"+str(self.nbj)+"-"+str(self.bestauc)+".pkl","wb") as output:
+        if self.binary:
+            name = "Classifier-Binary"+name+"-"+str(self.symbol)+"-"+str(self.nbj)+"-"+str(self.bestauc)+".pkl"
+        else:
+            name = "Classifier-Continuous"+name+"-"+str(self.symbol)+"-"+str(self.nbj)+"-"+str(self.bestauc)+".pkl"
+        with open(name,"wb") as output:
             pickle.dump(classifier,output,pickle.HIGHEST_PROTOCOL)
         print "Classifier saved to %s" % "Classifier-"+name+"-"+str(self.symbol)+"-"+str(self.nbj)+"-"+str(self.bestauc)+".pkl"
 
@@ -281,7 +290,6 @@ class predictor(object):
         return classifier
 
     def Classify(self,date):
-        print date
         if isinstance(date, str):
             eee = dataRecovery.dateutil.parser.parse(date)
             if eee.day-1 < 10 and eee.month < 10:
@@ -293,7 +301,7 @@ class predictor(object):
             else:
                 strdate = "%s%s%s" % (eee.year, eee.month, eee.day-1)
 
-        self.Data = dataRecovery.historical_quotes(self.symbol,"20050505",strdate)
+        self.Data = dataRecovery.historical_quotes(self.symbol,"20050505",strdate)[::-1]
         self.defineDomain()
         vec = self.postTreatmentDataset(self.Data, forReal=True)
         rrrrr = vec.tolist()
@@ -312,7 +320,12 @@ class predictor(object):
         print result
 
     def defineDomain(self):
-        classattr = Orange.feature.Discrete("class", values=['Up','Down'])
+        self.binary = True
+        if self.binary:
+            pass
+            classattr = Orange.feature.Discrete("class", values=['Up','Down'])
+        else:
+            classattr = Orange.feature.Continuous("class")
         features = []
         i = 0
         while i != self.nbj-1:
@@ -339,7 +352,10 @@ class predictor(object):
                 except:
                     pass
         # on normalize
-        a=max(var)
+        try:
+            a=max(var)
+        except ValueError:
+            print 'o'
         o = []
         for elt in var:
             o.append(elt/a)
@@ -363,8 +379,13 @@ class predictor(object):
         return avg
 
 
-if __name__ == '__main__':
-    classifiersfiles = [elmt for elmt in listdir("/home/korrigan/PycharmProjects/TradesPrediction") if elmt.startswith("Classifier") and not elmt.__contains__("fann")]
+def testClassifiersInFolder():
+    classifiersfiles = [
+        elmt for elmt in listdir("/home/korrigan/PycharmProjects/TradesPrediction") if elmt.startswith("Classifier")
+        and not elmt.__contains__("fann")
+        and (elmt.__contains__("Continuous")
+        or elmt.__contains__("Binary"))
+    ]
     for e in classifiersfiles:
         try:
             e = predictor(fileName=e)
@@ -372,26 +393,45 @@ if __name__ == '__main__':
             # print traceback.format_exc()
             print e
         try:
-            e.Classify("20150410")
+            e.Classify("20150413")
         except:
             # print traceback.format_exc()
             continue
-    # raw_input()
-    # # tab = pd.read_csv("companylist.csv", quotechar='"')
-    # tab = pd.read_csv("cac40companyList.csv", quotechar='"')
-    # with open('res.csv','a+') as output:
-    #     for i,elmt in enumerate(tab['Symbol']):
-    #         for nb in [700,900,1100,1300,1500,1700]:
-    #             print tab['Name'][i]
-    #             try:
-    #                 e = predictor(symbol_of_stock=elmt,nbj=nb)
-    #                 e.runCrossValidation()
-    #                 output.write("%s,%s,%s,%s\n" % (tab['Name'][i],e.bestauc,e.bestlearner,e.nbj))
-    #                 e.TrainBestClassifier()
-    #                 if e.bestauc > 0.7:
-    #                     e.SaveClassifier(e.classifier,e.bestlearner)
-    #             except:
-    #                 print traceback.format_exc()
-    #                 continue
-    #             print " OK"
+
+def trainFromCac40():
+    tab = pd.read_csv("cac40companyList.csv", quotechar='"')
+    with open('res.csv','a+') as output:
+        for i,elmt in enumerate(tab['Symbol']):
+            for nb in [70,90,110,130]:
+                print tab['Name'][i]
+                try:
+                    e = predictor(symbol_of_stock=elmt,nbj=nb)
+                    e.runCrossValidation()
+                    output.write("%s,%s,%s,%s\n" % (tab['Name'][i],e.bestauc,e.bestlearner,e.nbj))
+                    e.TrainBestClassifier()
+                    if e.bestauc > 0.7:
+                        e.SaveClassifier(e.classifier,e.bestlearner)
+                except:
+                    print traceback.format_exc()
+                    continue
+                print " OK"
+
+def isWeekend(str):
+    """
+    retourne vrai si c'est le samedi ou le dimanche
+    :param str:
+    :return:
+    """
+    arr = str.split('-')
+    year = arr[0]
+    month = arr[1]
+    day = arr[2]
+    dayOfWeek = datetime.date(int(year),int(month),int(day)).isoweekday()
+    return (dayOfWeek>5)
+
+
+if __name__ == '__main__':
+    # testClassifiersInFolder()
+    # tab = pd.read_csv("companylist.csv", quotechar='"')
+    trainFromCac40()
 

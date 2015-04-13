@@ -542,3 +542,198 @@ Vivendi,0.633333333333,randomforest,110
 Vivendi,0.75,randomforest,150
 Vivendi,0.6,linearsvm,170
 Unibail,0.25,linearsvm,700
+Accor,0.5,majority,70
+Accor,0.688888888889,knn,90
+Accor,0.55,nn,110
+Air Liquide,0.733333333333,knn,70
+Air Liquide,0.844444444444,nn,90
+Air Liquide,0.666666666667,randomforest,110
+Alstom,0.65,naivebaye,70
+Alstom,0.5,majority,90
+Alstom,0.766666666667,nn,110
+Alstom,0.5,majority,130
+AXA,0.703333333333,fann,70
+AXA,0.794444444444,nn,90
+AXA,0.533333333333,linearsvm,110
+BNP Paribas,0.65,randomforest,70
+BNP Paribas,0.758333333333,naivebaye,90
+BNP Paribas,0.5,majority,110
+Bouygues,0.5,majority,70
+Bouygues,0.622222222222,knn,90
+Bouygues,0.8,knn,110
+Cap Gemini,0.741666666667,knn,70
+Cap Gemini,0.744444444444,fann,90
+Cap Gemini,0.75,naivebaye,110
+Carrefour,0.575,knn,70
+Carrefour,0.8125,knn,90
+Carrefour,0.65,linearsvm,110
+EADS,0.711111111111,randomforest,90
+EADS,0.65,fann,110
+EADS,0.6,randomforest,130
+EDF,0.553333333333,knn,70
+EDF,0.5,majority,90
+EDF,0.666666666667,nn,110
+EDF,0.6,fann,130
+Essilor INTL,0.625,knn,70
+Essilor INTL,0.683333333333,nn,90
+Essilor INTL,0.5,majority,110
+GDF Suez,0.7,knn,90
+GDF Suez,0.5,majority,110
+GDF Suez,0.55,nn,130
+Kering,0.554166666667,knn,70
+Kering,0.691666666667,knn,90
+Kering,0.525,naivebaye,110
+LVMH,0.68,nn,70
+LVMH,0.5,majority,90
+LVMH,0.8,nn,110
+Michelin,0.6375,naivebaye,70
+Michelin,0.508333333333,naivebaye,90
+Michelin,0.6,randomforest,110
+Orange,0.79,naivebaye,70
+Orange,0.566666666667,nn,90
+Orange,0.766666666667,naivebaye,110
+Pernod Ricard,0.675,knn,70
+Pernod Ricard,0.733333333333,randomforest,90
+Pernod Ricard,0.5,naivebaye,110
+Publicis Groupe,0.583333333333,fann,70
+Publicis Groupe,0.811111111111,naivebaye,90
+Publicis Groupe,0.733333333333,randomforest,110
+Renault,0.5,knn,70
+Renault,0.613888888889,naivebaye,90
+Renault,0.5,majority,110
+Safran,0.5,majority,70
+Safran,0.677777777778,naivebaye,90
+Safran,0.716666666667,nn,110
+Sanofi,0.59,fann,70
+Sanofi,0.816666666667,nn,90
+Sanofi,0.766666666667,naivebaye,110
+Schneider Electric,0.623333333333,linearsvm,70
+Schneider Electric,0.7,linearsvm,90
+Schneider Electric,0.716666666667,naivebaye,110
+Societe Generale,0.833333333333,knn,70
+Societe Generale,0.588888888889,nn,90
+Societe Generale,0.816666666667,knn,110
+STMicroelectronics,0.5,majority,70
+STMicroelectronics,0.644444444444,randomforest,90
+STMicroelectronics,0.5,majority,110
+STMicroelectronics,0.75,naivebaye,130
+Technip,0.5,majority,70
+Technip,0.55,randomforest,90
+Technip,0.916666666667,nn,110
+Total,0.635416666667,knn,70
+Total,0.755555555556,fann,90
+Total,0.716666666667,fann,110
+Unibail,0.5,majority,70
+Unibail,0.55,nn,90
+Unibail,0.5,majority,110
+Unibail,0.7,naivebaye,130
+Vallourec,0.583333333333,naivebaye,70
+Vallourec,0.788888888889,nn,90
+Vallourec,0.883333333333,fann,110
+Veolia Environ.,0.5,majority,70
+Veolia Environ.,0.755555555556,knn,90
+Veolia Environ.,0.516666666667,naivebaye,110
+Vinci,0.725,naivebaye,70
+Vinci,0.5,majority,90
+Vinci,0.6,fann,110
+Vivendi,0.5375,randomforest,70
+Vivendi,0.602777777778,knn,90
+Vivendi,0.5,majority,110
+Accor,0.5,majority,70
+Accor,0.688888888889,knn,90
+Accor,0.55,nn,110
+Air Liquide,0.733333333333,knn,70
+Air Liquide,0.844444444444,nn,90
+Air Liquide,0.666666666667,randomforest,110
+Alstom,0.65,naivebaye,70
+Alstom,0.5,majority,90
+Alstom,0.766666666667,nn,110
+Alstom,0.5,majority,130
+AXA,0.556666666667,linearsvm,70
+AXA,0.794444444444,nn,90
+AXA,0.533333333333,linearsvm,110
+BNP Paribas,0.65,randomforest,70
+BNP Paribas,0.758333333333,naivebaye,90
+BNP Paribas,0.5,majority,110
+Bouygues,0.5,majority,70
+Bouygues,0.622222222222,knn,90
+Bouygues,0.8,knn,110
+Cap Gemini,0.741666666667,knn,70
+Cap Gemini,0.688888888889,nn,90
+Cap Gemini,0.75,naivebaye,110
+Carrefour,0.575,knn,70
+Carrefour,0.8125,knn,90
+Carrefour,0.65,linearsvm,110
+EADS,0.861111111111,naivebaye,70
+EADS,0.711111111111,randomforest,90
+EADS,0.583333333333,nn,110
+EDF,0.553333333333,knn,70
+EDF,0.5,majority,90
+EDF,0.666666666667,nn,110
+EDF,0.55,naivebaye,130
+Essilor INTL,0.625,knn,70
+Essilor INTL,0.683333333333,nn,90
+Essilor INTL,0.5,majority,110
+GDF Suez,0.693333333333,randomforest,70
+GDF Suez,0.7,knn,90
+GDF Suez,0.5,majority,110
+GDF Suez,0.55,nn,130
+Kering,0.554166666667,knn,70
+Kering,0.691666666667,knn,90
+Kering,0.525,naivebaye,110
+LVMH,0.68,nn,70
+LVMH,0.5,majority,90
+LVMH,0.8,nn,110
+Michelin,0.6375,naivebaye,70
+Michelin,0.508333333333,naivebaye,90
+Michelin,0.6,randomforest,110
+Orange,0.79,naivebaye,70
+Orange,0.566666666667,nn,90
+Orange,0.766666666667,naivebaye,110
+Pernod Ricard,0.675,knn,70
+Pernod Ricard,0.733333333333,randomforest,90
+Pernod Ricard,0.5,naivebaye,110
+Publicis Groupe,0.5,majority,70
+Publicis Groupe,0.811111111111,naivebaye,90
+Publicis Groupe,0.733333333333,randomforest,110
+Renault,0.5,knn,70
+Renault,0.613888888889,naivebaye,90
+Renault,0.5,majority,110
+Safran,0.5,majority,70
+Safran,0.677777777778,naivebaye,90
+Safran,0.716666666667,nn,110
+Sanofi,0.586666666667,knn,70
+Sanofi,0.816666666667,nn,90
+Sanofi,0.766666666667,naivebaye,110
+Schneider Electric,0.623333333333,linearsvm,70
+Schneider Electric,0.7,linearsvm,90
+Schneider Electric,0.716666666667,naivebaye,110
+Societe Generale,0.833333333333,knn,70
+Societe Generale,0.588888888889,nn,90
+Societe Generale,0.816666666667,knn,110
+STMicroelectronics,0.5,majority,70
+STMicroelectronics,0.644444444444,randomforest,90
+STMicroelectronics,0.5,majority,110
+STMicroelectronics,0.75,naivebaye,130
+Technip,0.5,majority,70
+Technip,0.55,randomforest,90
+Technip,0.916666666667,nn,110
+Total,0.635416666667,knn,70
+Total,0.744444444444,naivebaye,90
+Total,0.666666666667,knn,110
+Unibail,0.5,majority,70
+Unibail,0.55,nn,90
+Unibail,0.5,majority,110
+Unibail,0.7,naivebaye,130
+Vallourec,0.583333333333,naivebaye,70
+Vallourec,0.788888888889,nn,90
+Vallourec,0.583333333333,nn,110
+Veolia Environ.,0.5,majority,70
+Veolia Environ.,0.755555555556,knn,90
+Veolia Environ.,0.516666666667,naivebaye,110
+Vinci,0.725,naivebaye,70
+Vinci,0.5,majority,90
+Vinci,0.6,randomforest,110
+Vivendi,0.5375,randomforest,70
+Vivendi,0.602777777778,knn,90
+Vivendi,0.5,majority,110
